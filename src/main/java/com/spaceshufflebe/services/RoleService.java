@@ -9,17 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService {
 
-    public boolean Role(RoleDto role){
-        if(role.equals(false)){
-             return false;
-        }
-        else {
+    public boolean Role(RoleDto role) {
+        if (role.equals(false)) {
+            return false;
+        } else {
             return true;
         }
     }
-
-
-
 
 
 }

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
 
     private final RoleService roleService;
+
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
 
     @PostMapping
-    public boolean chooseRole(@RequestBody RoleDto role)
-    {
+    public boolean chooseRole(@RequestBody RoleDto role) {
         return roleService.Role(role);
     }
 
