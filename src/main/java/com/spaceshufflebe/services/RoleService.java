@@ -1,6 +1,8 @@
 package com.spaceshufflebe.services;
 
 import com.spaceshufflebe.models.RoleDto;
+import com.spaceshufflebe.repositories.RoleRepository;
+import com.spaceshufflebe.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 //false = driver
@@ -9,10 +11,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService {
 
+    private final RoleRepository roleRepository;
+
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+    public int drivers=0;
+    public int passengers=0;
     public boolean Role(RoleDto role) {
-        if (role.equals(false)) {
+        if (role.isDriver()){
+            drivers++;
             return false;
         } else {
+            passengers++;
             return true;
         }
     }

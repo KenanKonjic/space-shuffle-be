@@ -8,5 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RoleDto {
-    boolean Role;
+    boolean driver;
+    boolean passenger;
 }

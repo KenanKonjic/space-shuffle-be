@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.spaceshufflebe.models.entities.RoleEntity;
+
+
 @Entity
 @Table(name = "app_user")
 @Getter
@@ -31,4 +34,8 @@ public class UserEntity {
 
     @Column(name = "car")
     private Boolean car;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleEntity role;
 }
