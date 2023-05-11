@@ -1,42 +1,42 @@
 package com.spaceshufflebe.services;
-
 import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.entities.RideEntity;
+import com.spaceshufflebe.repositories.RideRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
+
+@Component
+@Slf4j
 @Service
 public class RideService {
+    @Autowired
+    RideRepository repository;
 
-    public List<RideDto> GetRides(){
-        List<RideDto> result = new ArrayList<>();
-        RideDto x = new RideDto(42L, "Adna", "Cengic Vila", "SSST", 3, new Date());
-        RideDto y = new RideDto(22L, "Amra", "Stup", "SSST", 1, new Date());
-        result.add(x);
-        result.add(y);
-        return result;
+    public RideEntity ReturnEntity(RideDto ride) throws Exception {
+
+        RideEntity rideDb = new RideEntity();
+        rideDb.setStaringLocation(ride.getStartingLocation());
+        rideDb.setAvailableSeats(ride.getAvailableSeats());
+        rideDb.setEndLocation(ride.getEndLocation());
+        return rideDb;
     }
 
-    public RideDto GetRide(long id){
-        return new RideDto(id, "Adna", "Cengic Vila", "SSST", 3, new Date());
+    public RideEntity createRide(RideDto ride) throws Exception {
+
+        RideEntity rideDb = this.ReturnEntity(ride);
+
+        return repository.save(rideDb);
+
     }
 
-    public RideDto CreateRide(RideDto ride){
-        ride.setAvailableSeats(2);
-        ride.setId(23L);
-        return ride;
-    }
-
-    public RideDto UpdateRide(long id, RideDto ride){
-        System.out.println("Ride found with id " + id);
-        ride.setId(id);
-        ride.setAvailableSeats(1);
-        return ride;
-    }
-
-    public void DeleteRide(long id){
-        System.out.println("Deleted " + id);
+    public List<RideEntity> getRides() {
+        log.info("getRides() called");
+        return repository.findAll();
     }
 }

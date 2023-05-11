@@ -1,13 +1,18 @@
 package com.spaceshufflebe.controllers;
 
 import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.entities.RideEntity;
 import com.spaceshufflebe.services.RideService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/rides")
+@RequestMapping("/ride")
 @RestController()
+@Slf4j
 public class RideController {
 
     private final RideService rideService;
@@ -17,27 +22,20 @@ public class RideController {
     }
 
     @GetMapping("/list")
-    public List<RideDto> getRides(){
-        return rideService.GetRides();
+    ResponseEntity<List<RideEntity>> getRideList() {
+        log.info("getRides() called");
+        return new ResponseEntity<>(rideService.getRides(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public RideDto getRide(@PathVariable long id){
-        return rideService.GetRide(id);
+    @PostMapping("")
+    ResponseEntity<Object> createRide(@RequestBody RideDto ride) throws Exception {
+        log.info("createRide() called");
+        return new ResponseEntity<>(rideService.createRide(ride), HttpStatus.OK);
+
     }
 
-    @PostMapping
-    public RideDto createRide(@RequestBody RideDto ride){
-        return rideService.CreateRide(ride);
-    }
 
-    @PutMapping("/{id}")
-    public RideDto updateRide(@PathVariable long id, @RequestBody RideDto ride){
-        return rideService.UpdateRide(id, ride);
-    }
 
-    @DeleteMapping("/{id}")
-    public void deleteRide(@PathVariable long id){
-        rideService.DeleteRide(id);
-    }
 }
+
+
