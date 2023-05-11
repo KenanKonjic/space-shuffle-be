@@ -4,15 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class RideDto {
-    private Long id;
+    private Integer id;
     private String startingLocation;
     private String endLocation;
-    private Number availableSeats;
-    private Date time;
+    private Integer availableSeats;
+    private Time time;
 }

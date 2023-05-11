@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -28,11 +28,10 @@ public class RideEntity {
     @Column(name = "endLocation", nullable = false)
     private String endLocation;
 
-    @CreationTimestamp
     @Column(name = "availableSeats", updatable = false)
     private Integer availableSeats;
 
-    @UpdateTimestamp
-    @Column(name = "datetime")
-    private Date updatedAt;
+    @Column(name = "time")
+    private Time time;
+
 }

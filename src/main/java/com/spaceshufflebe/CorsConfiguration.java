@@ -1,4 +1,4 @@
-package com.spaceshufflebe.config;
+package com.spaceshufflebe;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfiguration {
-
     @Value("${frontend.url}")
     private String[] frontendUrl;
 
@@ -19,7 +18,7 @@ public class CorsConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("*")
-                        .allowedOrigins(frontendUrl);
+                        .allowedOrigins("*");
             }
         };
     }
