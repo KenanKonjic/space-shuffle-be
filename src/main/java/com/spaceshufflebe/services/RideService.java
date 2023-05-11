@@ -3,40 +3,29 @@ package com.spaceshufflebe.services;
 import com.spaceshufflebe.models.RideDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RideService {
 
-    public List<RideDto> GetRides(){
-        List<RideDto> result = new ArrayList<>();
-        RideDto x = new RideDto(42L, "Adna", "Cengic Vila", "SSST", 3, new Date());
-        RideDto y = new RideDto(22L, "Amra", "Stup", "SSST", 1, new Date());
-        result.add(x);
-        result.add(y);
-        return result;
-    }
 
-    public RideDto GetRide(long id){
-        return new RideDto(id, "Adna", "Cengic Vila", "SSST", 3, new Date());
-    }
 
-    public RideDto CreateRide(RideDto ride){
-        ride.setAvailableSeats(2);
-        ride.setId(23L);
-        return ride;
-    }
+        private Map<Long, RideDto> rides = new HashMap<>();
+        private long lastRideId = 0;
 
-    public RideDto UpdateRide(long id, RideDto ride){
-        System.out.println("Ride found with id " + id);
-        ride.setId(id);
-        ride.setAvailableSeats(1);
-        return ride;
-    }
+        public RideDto createRide(RideDto ride) {
+            ride.setId(lastRideId++);
+            rides.put(ride.getId(), ride);
+            return ride;
+        }
 
-    public void DeleteRide(long id){
-        System.out.println("Deleted " + id);
-    }
+        public RideDto getRide(long id) {
+            return rides.get(id);
+        }
+
+//    public List<RideDto> getRides(long rideId) {
+//        return rides.get(rideId);
+//    }
 }

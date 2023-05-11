@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/rides")
+@RequestMapping("/ride")
 @RestController()
 public class RideController {
 
@@ -16,28 +16,28 @@ public class RideController {
         this.rideService = rideService;
     }
 
-    @GetMapping("/list")
-    public List<RideDto> getRides(){
-        return rideService.GetRides();
-    }
+//    @GetMapping("/list")
+//    public List<RideDto> getRides(@PathVariable long rideId){
+//        return rideService.getRides(rideId);
+//    }
 
     @GetMapping("/{id}")
     public RideDto getRide(@PathVariable long id){
-        return rideService.GetRide(id);
+        return rideService.getRide(id);
     }
 
     @PostMapping
     public RideDto createRide(@RequestBody RideDto ride){
-        return rideService.CreateRide(ride);
-    }
+        return rideService.createRide(ride);
+    }}
 
-    @PutMapping("/{id}")
-    public RideDto updateRide(@PathVariable long id, @RequestBody RideDto ride){
-        return rideService.UpdateRide(id, ride);
-    }
+//    @PutMapping("/{id}")
+//    public RideDto updateRide(@PathVariable long id, @RequestBody RideDto ride){
+//        return rideService.UpdateRide(id, ride);
+//    }
 
-    @DeleteMapping("/{id}")
-    public void deleteRide(@PathVariable long id){
-        rideService.DeleteRide(id);
-    }
-}
+//    @DeleteMapping("/{id}")
+//    public void deleteRide(@PathVariable long id){
+//        rideService.DeleteRide(id);
+//    }
+//}

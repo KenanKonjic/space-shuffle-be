@@ -11,7 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class RideDto {
     private Long id;
-    private String driverName;
     private String startingLocation;
     private String endLocation;
     private Number availableSeats;
