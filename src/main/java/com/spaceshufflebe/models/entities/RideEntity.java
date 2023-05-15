@@ -23,7 +23,7 @@ public class RideEntity {
     private Integer id;
 
     @Column(name = "startingLocation", nullable = false, unique = true)
-    private String staringLocation;
+    private String startingLocation;
 
     @Column(name = "endLocation", nullable = false)
     private String endLocation;
