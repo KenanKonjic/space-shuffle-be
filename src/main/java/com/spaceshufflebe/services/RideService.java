@@ -1,42 +1,80 @@
 package com.spaceshufflebe.services;
-
 import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.entities.RideEntity;
+import com.spaceshufflebe.repositories.RideRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+
+@Component
+@Slf4j
 @Service
 public class RideService {
 
-    public List<RideDto> GetRides(){
-        List<RideDto> result = new ArrayList<>();
-        RideDto x = new RideDto(42L, "Adna", "Cengic Vila", "SSST", 3, new Date());
-        RideDto y = new RideDto(22L, "Amra", "Stup", "SSST", 1, new Date());
-        result.add(x);
-        result.add(y);
-        return result;
+    private final RideRepository repository;
+
+    public RideService(RideRepository repository) {
+        this.repository = repository;
     }
 
-    public RideDto GetRide(long id){
-        return new RideDto(id, "Adna", "Cengic Vila", "SSST", 3, new Date());
+    public RideEntity ReturnEntity(RideDto ride) throws Exception {
+
+        RideEntity rideDb = new RideEntity();
+        rideDb.setStartingLocation(ride.getStartingLocation());
+        rideDb.setAvailableSeats(ride.getAvailableSeats());
+        rideDb.setEndLocation(ride.getEndLocation());
+        return rideDb;
     }
 
-    public RideDto CreateRide(RideDto ride){
-        ride.setAvailableSeats(2);
-        ride.setId(23L);
-        return ride;
+    public RideEntity createRide(RideDto ride) throws Exception {
+
+        RideEntity rideDb = this.ReturnEntity(ride);
+
+        return repository.save(rideDb);
+
     }
 
-    public RideDto UpdateRide(long id, RideDto ride){
-        System.out.println("Ride found with id " + id);
-        ride.setId(id);
-        ride.setAvailableSeats(1);
-        return ride;
+    public List<RideEntity> getRides() {
+        log.info("getRides() called");
+        return repository.findAll();
     }
 
-    public void DeleteRide(long id){
-        System.out.println("Deleted " + id);
+    public void deleteRide(Integer id) {
+        repository.deleteById(id);
     }
+
+    public RideDto updateRide(Integer id, RideDto dto) {
+        RideEntity entity = getEntity(id);
+        entity.setAvailableSeats(dto.getAvailableSeats());
+        entity.setEndLocation(dto.getEndLocation());
+        entity.setAvailableSeats(dto.getAvailableSeats());
+        entity.setTime(dto.getTime());
+
+        RideEntity ride = repository.save(entity);
+
+        return toDto(ride);
+    }
+
+    private static RideDto toDto(RideEntity ride) {
+        return new RideDto(ride.getId(),
+                ride.getStartingLocation(),
+                ride.getEndLocation(),
+                ride.getAvailableSeats(),
+                ride.getTime());
+    }
+
+    private RideEntity getEntity(Integer id) {
+        Optional<RideEntity> rideOptional = repository.findById(id);
+        if(rideOptional.isPresent()) {
+            return rideOptional.get();
+        }
+
+        throw new RuntimeException("Ride with id:" + id + " does not exist!");
+    }
+
 }

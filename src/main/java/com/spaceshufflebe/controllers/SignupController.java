@@ -14,7 +14,7 @@ public class SignupController {
     }
 
     @PostMapping()
-    public boolean createAccount(@RequestBody SignupDto signup) {
+    public SignupDto createAccount(@RequestBody SignupDto signup) {
         return signupService.createAccount(signup);
     }
 
