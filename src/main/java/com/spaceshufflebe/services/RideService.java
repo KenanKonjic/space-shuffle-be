@@ -8,20 +8,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 
 @Component
 @Slf4j
 @Service
 public class RideService {
-    @Autowired
-    RideRepository repository;
+
+    private final RideRepository repository;
+
+    public RideService(RideRepository repository) {
+        this.repository = repository;
+    }
 
     public RideEntity ReturnEntity(RideDto ride) throws Exception {
 
         RideEntity rideDb = new RideEntity();
-        rideDb.setStaringLocation(ride.getStartingLocation());
+        rideDb.setStartingLocation(ride.getStartingLocation());
         rideDb.setAvailableSeats(ride.getAvailableSeats());
         rideDb.setEndLocation(ride.getEndLocation());
         return rideDb;
@@ -39,4 +43,38 @@ public class RideService {
         log.info("getRides() called");
         return repository.findAll();
     }
+
+    public void deleteRide(Integer id) {
+        repository.deleteById(id);
+    }
+
+    public RideDto updateRide(Integer id, RideDto dto) {
+        RideEntity entity = getEntity(id);
+        entity.setAvailableSeats(dto.getAvailableSeats());
+        entity.setEndLocation(dto.getEndLocation());
+        entity.setAvailableSeats(dto.getAvailableSeats());
+        entity.setTime(dto.getTime());
+
+        RideEntity ride = repository.save(entity);
+
+        return toDto(ride);
+    }
+
+    private static RideDto toDto(RideEntity ride) {
+        return new RideDto(ride.getId(),
+                ride.getStartingLocation(),
+                ride.getEndLocation(),
+                ride.getAvailableSeats(),
+                ride.getTime());
+    }
+
+    private RideEntity getEntity(Integer id) {
+        Optional<RideEntity> rideOptional = repository.findById(id);
+        if(rideOptional.isPresent()) {
+            return rideOptional.get();
+        }
+
+        throw new RuntimeException("Ride with id:" + id + " does not exist!");
+    }
+
 }
