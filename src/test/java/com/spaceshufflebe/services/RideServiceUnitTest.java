@@ -6,12 +6,14 @@ import com.spaceshufflebe.models.entities.RideEntity;
 import com.spaceshufflebe.repositories.RideRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -21,12 +23,13 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
 class RideServiceUnitTest {
     @MockBean
     private RideRepository repository;
 
     @TestConfiguration
-    static class MilestoneServiceTestConfiguration {
+    static class RideServiceTestConfiguration {
 
         @Bean
         @Primary
