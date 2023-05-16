@@ -47,19 +47,19 @@ public class ReviewServiceUnitTest {
         Mockito.when(reviewRepository.findAll())
                 .thenReturn(List.of(ReviewTest.review()));
         //act
-        List<ReviewDto> returnedReviews = reviewService.GetReviews();
+        List<ReviewDto> returnedReviews = reviewService.getReviews();
 
         //assert
-        assertThat(returnedReviews).hasSize(2);
+        assertThat(returnedReviews).hasSize(1);
     }
-//    @Test
-//    public void givenNoReviews_whenGetReviews_thenReviewsShouldBeEmpty() {
-//        // act
-//        List<ReviewDto> returnedReviews = ReviewService.GetReviews();
-//
-//        // assert
-//        assertThat(returnedReviews).isEmpty();
-//    }
+    @Test
+    public void givenNoReviews_whenGetReviews_thenReviewsShouldBeEmpty() {
+        // act
+        List<ReviewDto> returnedReviews = reviewService.getReviews();
+
+        // assert
+        assertThat(returnedReviews).isEmpty();
+    }
 
     @Test
     public void givenValidId_whenGetReview_thenReviewShouldBeFound() {
@@ -69,17 +69,17 @@ public class ReviewServiceUnitTest {
                 .thenReturn(Optional.of(ReviewTest.review()));
 
         // act
-        ReviewDto resultReview = reviewService.GetReview(id);
+        ReviewDto resultReview = reviewService.getReview(id);
 
         // assert
-        assertThat(resultReview.getReviewText()).isEqualTo("Late");
+        assertThat(resultReview.getReviewText()).isEqualTo("Good");
     }
-//    @Test
-//    public void givenInvalidId_whenGetReview_thenExceptionShouldBeThrown() {
-//        assertThatThrownBy(() -> reviewService.GetReview(3L))
-//                .isInstanceOf(RuntimeException.class)
-//                .hasMessageContaining("does not exist");
-//    }
+    @Test
+    public void givenInvalidId_whenGetReview_thenExceptionShouldBeThrown() {
+        assertThatThrownBy(() -> reviewService.getReview(3L))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("does not exist");
+    }
 
     @Test
     public void givenReview_whenCreateReview_thenReviewIsReturned() {
@@ -92,27 +92,27 @@ public class ReviewServiceUnitTest {
                 .thenReturn(outputReview);
 
         // act
-        ReviewDto resultReview= reviewService.CreateReview(inputReviewDto);
+        ReviewDto resultReview= reviewService.createReview(inputReviewDto);
 
         // assert
         assertThat(resultReview).isNotNull();
         assertThat(resultReview.getReviewText()).isEqualTo(inputReviewDto.getReviewText());
         assertThat(resultReview.getId()).isNotEqualTo(0L);
     }
-//    @Test
-//    public void givenReview_whenCreateReview_thenRepositoryCalled() {
-//        // arrange
-//        ReviewDto reviewDto = ReviewTest.reviewDto2();
-//
-//        Mockito.when(reviewRepository.save(any(Review.class)))
-//                .thenReturn(ReviewTest.review());
-//
-//        // act
-//        reviewService.CreateReview(reviewDto);
-//
-//        // assert
-//        verify(reviewRepository, times(1)).save(any(Review.class));
-//    }
+    @Test
+    public void givenReview_whenCreateReview_thenRepositoryCalled() {
+        // arrange
+        ReviewDto reviewDto = ReviewTest.reviewDto2();
+
+        Mockito.when(reviewRepository.save(any(Review.class)))
+                .thenReturn(ReviewTest.review());
+
+        // act
+        reviewService.createReview(reviewDto);
+
+        // assert
+        verify(reviewRepository, times(1)).save(any(Review.class));
+    }
 
     @Test
     public void givenReviewAndValidId_whenUpdate_thenReviewReturned() {
@@ -129,7 +129,7 @@ public class ReviewServiceUnitTest {
                 .thenReturn(outputReview);
 
         // act
-        ReviewDto resultReview = reviewService.UpdateReview(id, inputReviewDto);
+        ReviewDto resultReview = reviewService.updateReview(id, inputReviewDto);
 
         // assert
         assertThat(resultReview).isNotNull();
@@ -137,23 +137,16 @@ public class ReviewServiceUnitTest {
         assertThat(resultReview.getId()).isEqualTo(id);
     }
 
-//    @Test
-//    public void givenInvalidId_whenUpdate_thenExceptionShouldBeThrown() {
-//        assertThatThrownBy(() -> reviewService.UpdateReview(2L, ReviewTest.reviewDto2()))
-//                .isInstanceOf(RuntimeException.class)
-//                .hasMessageContaining("does not exist");
-//    }
+    @Test
+    public void givenReview_whenDelete_thenRepositoryCalled() {
+        // arrange
+        long id = 2L;
 
-//    @Test
-//    public void givenReview_whenDelete_thenRepositoryCalled() {
-//        // arrange
-//        long id = 2L;
-//
-//        // act
-//        reviewService.DeleteReview(id);
-//
-//        // assert
-//        verify(reviewRepository, times(1)).deleteById(id);
-//    }
+        // act
+        reviewService.deleteReview(id);
+
+        // assert
+        verify(reviewRepository, times(1)).deleteById(id);
+    }
 
 }

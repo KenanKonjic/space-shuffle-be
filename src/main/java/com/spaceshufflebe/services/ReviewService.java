@@ -18,48 +18,35 @@ public class ReviewService {
         this.repository = repository;
     }
 
-    public List<ReviewDto> GetReviews() {
+    public List<ReviewDto> getReviews() {
+        List<Review> reviews = repository.findAll();
         List<ReviewDto> result = new ArrayList<>();
-        ReviewDto x = new ReviewDto(22L, 12L, "Excellent driver", 5);
-        ReviewDto y = new ReviewDto(23L, 14L, "Late", 3);
-        result.add(x);
-        result.add(y);
+        for (Review review : reviews) {
+            result.add(toDto(review));
+        }
         return result;
-//        List<Review> reviews = ReviewRepository.findAll();
-//        List<ReviewDto> result = new ArrayList<>();
-//        for (Review review : reviews) {
-//            result.add(toDto(review));
-//        }
-//        return result;
     }
 
-    public ReviewDto GetReview(long id){
-
-        return new ReviewDto(id, 23L, "Late", 3);
-//        Review entity = getEntity(id);
-//        return toDto(entity);
+    public ReviewDto getReview(long id){
+        Review entity = getEntity(id);
+        return toDto(entity);
     }
 
-    public ReviewDto CreateReview(ReviewDto review){
-        review.setId(33L);
-        review.setReviewText("Okay");
-        return review;
-
-//        Review entity = toEntity(reviewDto);
-//        Review review = ReviewRepository.save(entity);
-//        return toDto(review);
+    public ReviewDto createReview(ReviewDto reviewDto){
+        Review entity = toEntity(reviewDto);
+        Review review = repository.save(entity);
+        return toDto(review);
     }
 
-    public ReviewDto UpdateReview(long id, ReviewDto review){
+    public ReviewDto updateReview(long id, ReviewDto review){
         System.out.println("Review found with id " + id);
         review.setId(id);
         review.setRating(5);
         return review;
     }
 
-    public void DeleteReview(long id){
-        System.out.println("Deleted " + id);
-        // ReviewRepository.deleteById(id);
+    public void deleteReview(long id){
+         repository.deleteById(id);
     }
 
     private static ReviewDto toDto(Review review) {
@@ -75,12 +62,12 @@ public class ReviewService {
         return review;
     }
 
-//    private Review getEntity(long id) {
-//        Optional<Review> reviewOptional = ReviewRepository.findById(id);
-//        if(reviewOptional.isPresent()) {
-//            return reviewOptional.get();
-//        }
-//
-//        throw new RuntimeException("Review with id:" + id + " does not exist!");
-//    }
+    private Review getEntity(long id) {
+        Optional<Review> reviewOptional = repository.findById(id);
+        if(reviewOptional.isPresent()) {
+            return reviewOptional.get();
+        }
+
+        throw new RuntimeException("Review with id:" + id + " does not exist!");
+    }
 }

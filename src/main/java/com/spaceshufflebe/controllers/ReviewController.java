@@ -14,23 +14,23 @@ public class ReviewController {
     public ReviewController(ReviewService reviewService) {this.reviewService = reviewService;}
 
     @GetMapping("/list")
-    public List<ReviewDto> GetReviews(){
-        return reviewService.GetReviews();
+    public List<ReviewDto> getReviews(){
+        return reviewService.getReviews();
     }
 
     @GetMapping("/{id}")
-    public ReviewDto GetReview(@PathVariable long id){return reviewService.GetReview(id);}
+    public ReviewDto getReview(@PathVariable long id){return reviewService.getReview(id);}
 
     @PostMapping
     public ReviewDto createReview(@RequestBody ReviewDto review){
-        return reviewService.CreateReview(review);
+        return reviewService.createReview(review);
     }
 
     @PutMapping("/{id}")
-    public ReviewDto updateReview(@PathVariable long id, @RequestBody ReviewDto review){return reviewService.UpdateReview(id, review);}
+    public ReviewDto updateReview(@PathVariable long id, @RequestBody ReviewDto review){return reviewService.updateReview(id, review);}
 
     @DeleteMapping("/{id}")
     public void deleteReview(@PathVariable long id){
-        reviewService.DeleteReview(id);
+        reviewService.deleteReview(id);
     }
 }
