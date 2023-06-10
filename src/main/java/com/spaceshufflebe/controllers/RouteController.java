@@ -1,6 +1,6 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.RouteDto;
+import com.spaceshufflebe.models.dtos.RouteDto;
 import com.spaceshufflebe.services.RouteService;
 import org.springframework.web.bind.annotation.*;
 

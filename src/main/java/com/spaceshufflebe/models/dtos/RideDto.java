@@ -1,4 +1,4 @@
-package com.spaceshufflebe.models;
+package com.spaceshufflebe.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

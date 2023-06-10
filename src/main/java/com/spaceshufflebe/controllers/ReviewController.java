@@ -1,6 +1,6 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.ReviewDto;
+import com.spaceshufflebe.models.dtos.ReviewDto;
 import com.spaceshufflebe.services.ReviewService;
 import org.springframework.web.bind.annotation.*;
 

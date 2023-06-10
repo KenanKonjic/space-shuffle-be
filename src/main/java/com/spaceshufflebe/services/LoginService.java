@@ -1,6 +1,6 @@
 package com.spaceshufflebe.services;
 
-import com.spaceshufflebe.models.LoginDto;
+import com.spaceshufflebe.models.dtos.LoginDto;
 import org.springframework.stereotype.Service;
 
 @Service

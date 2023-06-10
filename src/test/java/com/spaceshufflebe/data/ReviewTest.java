@@ -1,7 +1,7 @@
 package com.spaceshufflebe.data;
 
 import com.spaceshufflebe.models.entities.Review;
-import com.spaceshufflebe.models.ReviewDto;
+import com.spaceshufflebe.models.dtos.ReviewDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

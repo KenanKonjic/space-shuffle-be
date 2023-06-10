@@ -1,6 +1,6 @@
 package com.spaceshufflebe.data;
 
-import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.dtos.RideDto;
 import com.spaceshufflebe.models.entities.RideEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.spaceshufflebe.services;
 
-import com.spaceshufflebe.models.SignupDto;
+import com.spaceshufflebe.models.dtos.SignupDto;
 import com.spaceshufflebe.models.entities.UserEntity;
 import com.spaceshufflebe.repositories.UserRepository;
 import org.springframework.stereotype.Service;

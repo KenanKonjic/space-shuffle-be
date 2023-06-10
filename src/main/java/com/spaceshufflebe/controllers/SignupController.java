@@ -1,6 +1,6 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.SignupDto;
+import com.spaceshufflebe.models.dtos.SignupDto;
 import com.spaceshufflebe.services.SignupService;
 import org.springframework.web.bind.annotation.*;
 

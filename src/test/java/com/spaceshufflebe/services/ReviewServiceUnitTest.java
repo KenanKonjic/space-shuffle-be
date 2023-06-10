@@ -1,7 +1,7 @@
 package com.spaceshufflebe.services;
 
 import com.spaceshufflebe.data.ReviewTest;
-import com.spaceshufflebe.models.ReviewDto;
+import com.spaceshufflebe.models.dtos.ReviewDto;
 import com.spaceshufflebe.models.entities.Review;
 import com.spaceshufflebe.repositories.ReviewRepository;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.RoleDto;
+import com.spaceshufflebe.models.dtos.RoleDto;
 import com.spaceshufflebe.services.RoleService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
