@@ -40,7 +40,7 @@ public class AuthController {
         }
         else{
             String op=customAuthenticationManager.passwordEncoder().encode(payload.getPassword());
-            userRepository.save(new UserEntity(1, payload.getName(), payload.getSurname(), payload.getUsername(), op, payload.getCar(), Boolean.FALSE));
+            userRepository.save(new UserEntity(payload.getName(), payload.getSurname(), payload.getUsername(), op, payload.getCar(), Boolean.FALSE));
             return  ResponseEntity.ok("\"Data is valid\"");
         }
     }

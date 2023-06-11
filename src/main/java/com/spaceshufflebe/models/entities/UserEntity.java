@@ -35,4 +35,13 @@ public class UserEntity {
 
     @Column(name = "role")
     private Boolean role;
+
+    public UserEntity(String name, String surname, String username, String password, Boolean car, Boolean role) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.car = car;
+        this.role = role;
+    }
 }
