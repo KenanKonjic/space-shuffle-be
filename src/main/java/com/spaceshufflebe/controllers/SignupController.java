@@ -4,18 +4,18 @@ import com.spaceshufflebe.models.dtos.SignupDto;
 import com.spaceshufflebe.services.SignupService;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/signup")
+@RequestMapping()
 @RestController
 public class SignupController {
-    private final SignupService signupService;
-
-    public SignupController(SignupService signupService) {
-        this.signupService = signupService;
-    }
-
-    @PostMapping()
-    public SignupDto createAccount(@RequestBody SignupDto signup) {
-        return signupService.createAccount(signup);
-    }
+//    private final SignupService signupService;
+//
+//    public SignupController(SignupService signupService) {
+//        this.signupService = signupService;
+//    }
+//
+//    @PostMapping()
+//    public SignupDto createAccount(@RequestBody SignupDto signup) {
+//        return signupService.createAccount(signup);
+//    }
 
 }

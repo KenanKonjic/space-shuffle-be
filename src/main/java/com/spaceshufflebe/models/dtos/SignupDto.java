@@ -9,10 +9,10 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class SignupDto {
-    private String name;
-    private String surname;
-    private Long Id;
-    private String email;
-    private String password;
-    private Boolean car;
+//    private String name;
+//    private String surname;
+//    private Long Id;
+//    private String username;
+//    private String password;
+//    private Boolean car;
 }
