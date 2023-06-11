@@ -1,7 +1,7 @@
 package com.spaceshufflebe.filters;
 
 import com.spaceshufflebe.models.SimpleUser;
-import com.spaceshufflebe.services.SpaceShuffleUserDetailsService;
+import com.spaceshufflebe.services.UserService;
 import com.spaceshufflebe.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +24,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private static final String BEARER_STRING = "Bearer ";
     private static final int BEARER_STRING_LENGTH = 7;
     private final JwtUtil jwtUtil;
-    private final SpaceShuffleUserDetailsService userDetailsService;
+    private final UserService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -37,7 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             String username = jwtUtil.extractUsername(jwt);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                SimpleUser simpleUser = userDetailsService.getUserByEmail(username);
+                SimpleUser simpleUser = userDetailsService.getUserByUsername(username);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(simpleUser, null, null);
                 usernamePasswordAuthenticationToken

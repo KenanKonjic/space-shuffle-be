@@ -12,32 +12,32 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
-public class SpaceShuffleUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public SpaceShuffleUserDetailsService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String eMail) throws UsernameNotFoundException {
-        UserEntity user = getFullUserByEmail(eMail);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity user = getFullUserByUsername(username);
         user = new UserEntity();
-        user.setEmail(eMail);
+        user.setUsername(username);
         //$2a$12$6zdoF5KmZTdGH2/EkVav0.wQB.K.RxsKb6EfPeXUl0rNQ8xQaRUcS
-        user.setPassword(userRepository.findFirstByEmail(eMail).getPassword());
+        user.setPassword(userRepository.findFirstByUsername(username).getPassword());
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),
                 user.getPassword(), Collections.emptyList());
     }
 
-    public SimpleUser getUserByEmail(String eMail) {
-        getFullUserByEmail(eMail); // user exists?
-        return new SimpleUser(eMail);
+    public SimpleUser getUserByUsername(String username) {
+        getFullUserByUsername(username); // user exists?
+        return new SimpleUser(username);
     }
 
-    private UserEntity getFullUserByEmail(String eMail) {
-        return userRepository.findFirstByEmail(eMail);
+    private UserEntity getFullUserByUsername(String username) {
+        return userRepository.findFirstByUsername(username);
     }
 }
