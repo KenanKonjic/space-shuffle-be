@@ -1,6 +1,7 @@
 package com.spaceshufflebe.config;
 
-import com.spaceshufflebe.services.SpaceShuffleUserDetailsService;
+import com.spaceshufflebe.repositories.UserRepository;
+import com.spaceshufflebe.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,18 +16,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomAuthenticationManager implements AuthenticationManager {
+    private final UserRepository userRepository;
 
     @Autowired
-    private SpaceShuffleUserDetailsService customUserDetailsService;
+    private UserService userService;
+
+    public CustomAuthenticationManager(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     @Bean
-    protected PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        final UserDetails userDetail = customUserDetailsService.loadUserByUsername(authentication.getName());
+        final UserDetails userDetail = userService.loadUserByUsername(authentication.getName());
         if (!passwordEncoder().matches(authentication.getCredentials().toString(), userDetail.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
