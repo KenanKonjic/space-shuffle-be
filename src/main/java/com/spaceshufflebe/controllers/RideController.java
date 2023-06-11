@@ -1,6 +1,6 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.dtos.RideDto;
 import com.spaceshufflebe.models.entities.RideEntity;
 import com.spaceshufflebe.services.RideService;
 import lombok.extern.slf4j.Slf4j;

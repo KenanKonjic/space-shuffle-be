@@ -1,11 +1,7 @@
 package com.spaceshufflebe.controllers;
 
-import com.spaceshufflebe.models.AdminDto;
-import com.spaceshufflebe.models.RideDto;
-import com.spaceshufflebe.models.RoleDto;
+import com.spaceshufflebe.models.dtos.AdminDto;
 import com.spaceshufflebe.services.AdminService;
-import com.spaceshufflebe.services.RideService;
-import com.spaceshufflebe.services.RoleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

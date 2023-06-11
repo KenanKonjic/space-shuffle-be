@@ -1,4 +1,4 @@
-package com.spaceshufflebe.models;
+package com.spaceshufflebe.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-
-public class LoginDto {
-    private String username;
-    private String password;
+public class RoleDto {
+    boolean driver;
+    boolean passenger;
 }

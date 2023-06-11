@@ -1,8 +1,7 @@
 package com.spaceshufflebe.services;
 
-import com.spaceshufflebe.models.RouteDto;
+import com.spaceshufflebe.models.dtos.RouteDto;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event;
 
 import java.util.ArrayList;
 import java.util.List;

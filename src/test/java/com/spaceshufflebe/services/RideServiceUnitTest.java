@@ -1,7 +1,7 @@
 package com.spaceshufflebe.services;
 
 import com.spaceshufflebe.data.RideTest;
-import com.spaceshufflebe.models.RideDto;
+import com.spaceshufflebe.models.dtos.RideDto;
 import com.spaceshufflebe.models.entities.RideEntity;
 import com.spaceshufflebe.repositories.RideRepository;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;

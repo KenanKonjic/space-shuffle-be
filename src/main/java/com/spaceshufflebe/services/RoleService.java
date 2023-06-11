@@ -1,8 +1,7 @@
 package com.spaceshufflebe.services;
 
-import com.spaceshufflebe.models.RoleDto;
+import com.spaceshufflebe.models.dtos.RoleDto;
 import com.spaceshufflebe.repositories.RoleRepository;
-import com.spaceshufflebe.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 //false = driver
