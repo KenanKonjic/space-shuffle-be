@@ -3,6 +3,7 @@ import com.spaceshufflebe.models.dtos.RideDto;
 import com.spaceshufflebe.models.entities.RideEntity;
 import com.spaceshufflebe.repositories.RideRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -76,4 +77,8 @@ public class RideService {
         throw new RuntimeException("Ride with id:" + id + " does not exist!");
     }
 
+    public ResponseEntity<String> reserveSeat(Integer id) {
+        repository.findById(id).get().setAvailableSeats((repository.findById(id).get().getAvailableSeats())-1);
+        return ResponseEntity.ok("The number of seats has been updated!");
+    }
 }

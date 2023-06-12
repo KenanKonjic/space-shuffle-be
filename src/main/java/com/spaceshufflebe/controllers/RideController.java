@@ -48,6 +48,11 @@ public class RideController {
         return new ResponseEntity<>(updatedRide, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<String> reserveSeat(@PathVariable Integer id){
+        return rideService.reserveSeat(id);
+    }
+
 
 
 }
