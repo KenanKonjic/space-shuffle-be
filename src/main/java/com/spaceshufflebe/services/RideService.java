@@ -48,16 +48,17 @@ public class RideService {
         repository.deleteById(id);
     }
 
-    public RideDto updateRide(Integer id, RideDto dto) {
-        RideEntity entity = getEntity(id);
-        entity.setAvailableSeats(dto.getAvailableSeats());
-        entity.setEndLocation(dto.getEndLocation());
-        entity.setAvailableSeats(dto.getAvailableSeats());
-        entity.setTime(dto.getTime());
+    public RideDto updateRide(Integer id) {
+        RideEntity rideEntity = getEntity(id);
+        int availableSeats = rideEntity.getAvailableSeats();
 
-        RideEntity ride = repository.save(entity);
+        if (availableSeats <= 0) {
+            throw new RuntimeException("No available seats for the selected ride.");
+        }
 
-        return toDto(ride);
+        rideEntity.setAvailableSeats(availableSeats - 1);
+        RideEntity updatedRide = repository.save(rideEntity);
+        return toDto(updatedRide);
     }
 
     private static RideDto toDto(RideEntity ride) {

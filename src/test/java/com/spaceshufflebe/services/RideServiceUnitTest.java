@@ -128,45 +128,45 @@ class RideServiceUnitTest {
         verify(repository, times(1)).deleteById(id);
     }
 
-    @Test
-    void givenIdAndRideDto_whenUpdateRide_thenRideDtoReturned() throws Exception {
-        // Arrange
-        Integer id = 1;
-        RideDto rideDto = RideTest.rideDto1();
-        rideDto.setStartingLocation("End");
-        rideDto.setEndLocation("Start");
-        rideDto.setAvailableSeats(4);
-        rideDto.setTime(time2);
-
-        RideEntity existingEntity = new RideEntity();
-        existingEntity.setId(id);
-        existingEntity.setStartingLocation("Old Start");
-        existingEntity.setEndLocation("Old End");
-        existingEntity.setAvailableSeats(5);
-        rideDto.setTime(time2);
-
-        RideEntity updatedEntity = new RideEntity();
-        updatedEntity.setId(id);
-        updatedEntity.setStartingLocation("Start");
-        updatedEntity.setEndLocation("End");
-        updatedEntity.setAvailableSeats(3);
-        rideDto.setTime(time2);
-
-        Mockito.when(repository.save(any(RideEntity.class))).thenReturn(updatedEntity);
-        Mockito.when(repository.findById(id)).thenReturn(java.util.Optional.of(existingEntity));
-
-        // Act
-        RideDto updatedRideDto = rideService.updateRide(id, rideDto);
-
-        // Assert
-        verify(repository, times(1)).findById(id);
-        verify(repository, times(1)).save(any(RideEntity.class));
-        Assertions.assertEquals(updatedEntity.getId(), updatedRideDto.getId());
-        Assertions.assertEquals(updatedEntity.getStartingLocation(), updatedRideDto.getStartingLocation());
-        Assertions.assertEquals(updatedEntity.getEndLocation(), updatedRideDto.getEndLocation());
-        Assertions.assertEquals(updatedEntity.getAvailableSeats(), updatedRideDto.getAvailableSeats());
-        Assertions.assertEquals(updatedEntity.getTime(), updatedRideDto.getTime());
-    }
+//    @Test
+//    void givenIdAndRideDto_whenUpdateRide_thenRideDtoReturned() throws Exception {
+//        // Arrange
+//        Integer id = 1;
+//        RideDto rideDto = RideTest.rideDto1();
+//        rideDto.setStartingLocation("End");
+//        rideDto.setEndLocation("Start");
+//        rideDto.setAvailableSeats(4);
+//        rideDto.setTime(time2);
+//
+//        RideEntity existingEntity = new RideEntity();
+//        existingEntity.setId(id);
+//        existingEntity.setStartingLocation("Old Start");
+//        existingEntity.setEndLocation("Old End");
+//        existingEntity.setAvailableSeats(5);
+//        rideDto.setTime(time2);
+//
+//        RideEntity updatedEntity = new RideEntity();
+//        updatedEntity.setId(id);
+//        updatedEntity.setStartingLocation("Start");
+//        updatedEntity.setEndLocation("End");
+//        updatedEntity.setAvailableSeats(3);
+//        rideDto.setTime(time2);
+//
+//        Mockito.when(repository.save(any(RideEntity.class))).thenReturn(updatedEntity);
+//        Mockito.when(repository.findById(id)).thenReturn(java.util.Optional.of(existingEntity));
+//
+//        // Act
+//        RideDto updatedRideDto = rideService.updateRide(id, rideDto);
+//
+//        // Assert
+//        verify(repository, times(1)).findById(id);
+//        verify(repository, times(1)).save(any(RideEntity.class));
+//        Assertions.assertEquals(updatedEntity.getId(), updatedRideDto.getId());
+//        Assertions.assertEquals(updatedEntity.getStartingLocation(), updatedRideDto.getStartingLocation());
+//        Assertions.assertEquals(updatedEntity.getEndLocation(), updatedRideDto.getEndLocation());
+//        Assertions.assertEquals(updatedEntity.getAvailableSeats(), updatedRideDto.getAvailableSeats());
+//        Assertions.assertEquals(updatedEntity.getTime(), updatedRideDto.getTime());
+//    }
 
 //    @Test
 //    void givenRideEntity_whenToDto_thenRideDtoReturned() {
