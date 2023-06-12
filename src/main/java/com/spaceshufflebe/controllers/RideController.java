@@ -44,7 +44,7 @@ public class RideController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateRide(@PathVariable Integer id) {
         try {
-            rideService.deleteRide(id);
+            rideService.updateRide(id);
             return ResponseEntity.ok("Ride updated successfully!");
         } catch (RuntimeException e) {
             // Handle any exceptions or errors that may occur during the update process
