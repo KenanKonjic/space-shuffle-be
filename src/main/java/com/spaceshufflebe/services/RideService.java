@@ -47,7 +47,7 @@ public class RideService {
         repository.deleteById(id);
     }
 
-    public RideDto updateRide(Integer id) {
+    public void updateRide(Integer id) {
         RideEntity rideEntity = getEntity(id);
         int availableSeats = rideEntity.getAvailableSeats();
 
@@ -56,8 +56,7 @@ public class RideService {
         }
 
         rideEntity.setAvailableSeats(rideEntity.getAvailableSeats() - 1);
-        RideEntity updatedRide = repository.save(rideEntity);
-        return toDto(updatedRide);
+        repository.save(rideEntity);
     }
 
     private static RideDto toDto(RideEntity ride) {
