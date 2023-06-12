@@ -61,8 +61,8 @@ public class RideService {
         toDto(updatedRide);
     }
 
-    private static RideDto toDto(RideEntity ride) {
-        return new RideDto(ride.getId(),
+    private static void toDto(RideEntity ride) {
+        new RideDto(ride.getId(),
                 ride.getStartingLocation(),
                 ride.getEndLocation(),
                 ride.getAvailableSeats(),
