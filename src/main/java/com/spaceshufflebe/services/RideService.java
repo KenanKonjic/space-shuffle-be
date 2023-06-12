@@ -55,7 +55,7 @@ public class RideService {
             throw new RuntimeException("No available seats for the selected ride.");
         }
 
-        rideEntity.setAvailableSeats(availableSeats - 1);
+        rideEntity.setAvailableSeats(rideEntity.getAvailableSeats() - 1);
         RideEntity updatedRide = repository.save(rideEntity);
         return toDto(updatedRide);
     }
