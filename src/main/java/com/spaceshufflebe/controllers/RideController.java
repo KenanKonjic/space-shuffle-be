@@ -52,10 +52,6 @@ public class RideController {
         }
     }
 
-    @GetMapping("/reserve/{id}")
-    ResponseEntity<String> reserveSeat(@PathVariable Integer id){
-        return rideService.reserveSeat(id);
-    }
 
 
 
