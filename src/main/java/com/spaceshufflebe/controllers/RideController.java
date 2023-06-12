@@ -42,9 +42,14 @@ public class RideController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<RideDto> updateRide(@PathVariable Integer id) {
-        RideDto updatedRide = rideService.updateRide(id);
-        return new ResponseEntity<>(updatedRide, HttpStatus.OK);
+    public ResponseEntity<String> updateRide(@PathVariable Integer id) {
+        try {
+            RideDto updatedRide = rideService.updateRide(id);
+            return ResponseEntity.ok("Ride updated successfully!");
+        } catch (RuntimeException e) {
+            // Handle any exceptions or errors that may occur during the update process
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update ride: " + e.getMessage());
+        }
     }
 
     @GetMapping("/reserve/{id}")
