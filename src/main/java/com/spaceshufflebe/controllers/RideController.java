@@ -41,14 +41,12 @@ public class RideController {
         return new ResponseEntity<>("Ride deleted successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<RideDto> updateRide(@PathVariable Integer id, @RequestBody RideDto dto) {
-        log.info("updateRide() called with id: {}", id);
-        RideDto updatedRide = rideService.updateRide(id, dto);
+    ResponseEntity<RideDto> updateRide(@PathVariable Integer id) {
+        RideDto updatedRide = rideService.updateRide(id);
         return new ResponseEntity<>(updatedRide, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/reserve/{id}")
     ResponseEntity<String> reserveSeat(@PathVariable Integer id){
         return rideService.reserveSeat(id);
     }
