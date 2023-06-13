@@ -1,6 +1,8 @@
 package com.spaceshufflebe.controllers;
 
+import com.spaceshufflebe.models.entities.UserEntity;
 import com.spaceshufflebe.repositories.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,5 +21,22 @@ public class UserController {
     @GetMapping("/id/{username}")
     public ResponseEntity<String> getUserId(@PathVariable String username){
         return ResponseEntity.ok(String.valueOf(userRepository.findFirstByUsername(username).getId()));
+    }
+
+    @GetMapping("/search/{username}")
+    public ResponseEntity<UserEntity> searchUserByUsername(@PathVariable String username) {
+        try {
+            UserEntity user = userRepository.findFirstByUsername(username);
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            user.setPassword(null);
+
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
