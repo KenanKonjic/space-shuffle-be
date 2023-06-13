@@ -41,7 +41,7 @@ public class RideController {
         return new ResponseEntity<>("Ride deleted successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/ride/{id}")
+    @PutMapping("/{id}")
     public RideDto updateRide(@PathVariable Integer id) {
 //        try {
             return rideService.updateRide(id);
