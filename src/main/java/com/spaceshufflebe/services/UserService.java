@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
         return new SimpleUser(username);
     }
 
-    private UserEntity getFullUserByUsername(String username) {
+    public UserEntity getFullUserByUsername(String username) {
         return userRepository.findFirstByUsername(username);
     }
 }
