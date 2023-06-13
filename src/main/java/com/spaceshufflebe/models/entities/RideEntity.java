@@ -22,13 +22,13 @@ public class RideEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 
-    @Column(name = "startingLocation", nullable = false, unique = true)
+    @Column(name = "startingLocation", nullable = false)
     private String startingLocation;
 
     @Column(name = "endLocation", nullable = false)
     private String endLocation;
 
-    @Column(name = "availableSeats", updatable = false)
+    @Column(name = "availableSeats")
     private Integer availableSeats;
 
     @Column(name = "time")
