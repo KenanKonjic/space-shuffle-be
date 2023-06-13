@@ -32,6 +32,6 @@ public class RideEntity {
     private Integer availableSeats;
 
     @Column(name = "time")
-    private Time time;
+    private String time;
 
 }

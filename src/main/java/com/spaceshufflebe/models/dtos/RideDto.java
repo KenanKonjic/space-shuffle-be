@@ -16,5 +16,5 @@ public class RideDto {
     private String startingLocation;
     private String endLocation;
     private Integer availableSeats;
-    private Time time;
+    private String time;
 }
