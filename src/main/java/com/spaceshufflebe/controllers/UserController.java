@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private final UserRepository userRepository; UserService userService;
+    private final UserRepository userRepository; private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/id/{username}")
