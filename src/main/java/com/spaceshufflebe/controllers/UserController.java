@@ -1,7 +1,9 @@
 package com.spaceshufflebe.controllers;
 
+import com.spaceshufflebe.models.dtos.UserDto;
 import com.spaceshufflebe.models.entities.UserEntity;
 import com.spaceshufflebe.repositories.UserRepository;
+import com.spaceshufflebe.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; UserService userService;
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -38,5 +40,10 @@ public class UserController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/{username}")
+    public UserDto getMilestone(@PathVariable String username) {
+        return userService.getUser(username);
     }
 }

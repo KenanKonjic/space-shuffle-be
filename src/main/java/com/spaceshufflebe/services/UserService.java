@@ -2,14 +2,17 @@ package com.spaceshufflebe.services;
 
 
 import com.spaceshufflebe.models.SimpleUser;
+import com.spaceshufflebe.models.dtos.UserDto;
 import com.spaceshufflebe.models.entities.UserEntity;
 import com.spaceshufflebe.repositories.UserRepository;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -39,5 +42,30 @@ public class UserService implements UserDetailsService {
 
     public UserEntity getFullUserByUsername(String username) {
         return userRepository.findFirstByUsername(username);
+    }
+
+    public UserDto getUser(String username) {
+        UserEntity entity = getEntity(username);
+        return toDto(entity);
+    }
+
+    private UserEntity getEntity(String username) {
+        Optional<UserEntity> userOptional = Optional.ofNullable(userRepository.findFirstByUsername(username));
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+
+        throw new RuntimeException("User with username:" + username + " does not exist!");    }
+
+    private static UserDto toDto(UserEntity user) {
+        UserDto dto = new UserDto();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setPassword(user.getPassword());
+        dto.setCar(user.getCar());
+        dto.setRole(user.getRole());
+        dto.setName(user.getName());
+        dto.setSurname(user.getSurname());
+        return dto;
     }
 }

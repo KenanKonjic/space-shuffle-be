@@ -2,13 +2,15 @@ package com.spaceshufflebe.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
-    private Integer id;
+    private Long id;
     private String name;
     private String surname;
     private String username;
